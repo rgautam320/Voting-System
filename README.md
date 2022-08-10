@@ -10,6 +10,8 @@
 6. Roptsten
 7. Remix
 
+## [Live URL](https://web3-voting-app.netlify.app)
+
 ## Project Preview
 
 Voting is one of the most popular example to illustrate the potentials of Blockchain and Smart Contracts. Voting is a use case that is well aligned to the unique propositions of Blockchain technology.
