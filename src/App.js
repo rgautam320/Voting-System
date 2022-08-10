@@ -218,6 +218,8 @@ const App = () => {
                             account={account}
                             voting={voting}
                             setLoading={setLoading}
+                            setContract={setContract}
+                            contract={contract}
                             // Choices
                             getChoices={getChoices}
                             choices={choices}
@@ -252,6 +254,8 @@ const App = () => {
                             getBallotDetails={getBallotDetails}
                             state={state}
                             ballot={ballot}
+                            setContract={setContract}
+                            contract={contract}
                             // Voting
                             voting={voting}
                             // Choices

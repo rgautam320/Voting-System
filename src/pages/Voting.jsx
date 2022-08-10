@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Alert, Box, Button, Container, Divider, Paper, TextField, Typography } from "@mui/material";
 import { toast } from "react-toastify";
 
@@ -22,9 +22,9 @@ const Voting = ({
     state,
     getVoters,
     totalVoters,
+    setContract,
+    contract,
 }) => {
-    const [contractAddress, setContractAddress] = useState("");
-
     const doVote = async (val) => {
         setLoading(true);
         await voting.methods
@@ -42,20 +42,14 @@ const Voting = ({
     };
 
     useEffect(() => {
-        if (ballot.name) {
+        if (ballot.name && contract) {
             getChoices();
             getTotalVotes();
             checkIsVoter();
             getCurrentState();
             getVoters();
         }
-    }, [getChoices, getTotalVotes, checkIsVoter, getCurrentState, getVoters, ballot, contractAddress]);
-
-    useEffect(() => {
-        if (localStorage.getItem("CONTRACT")) {
-            setContractAddress(localStorage.getItem("CONTRACT"));
-        }
-    }, []);
+    }, [getChoices, getTotalVotes, checkIsVoter, getCurrentState, getVoters, ballot, contract]);
 
     return (
         <Container>
@@ -71,12 +65,12 @@ const Voting = ({
                         <form onSubmit={getBallotDetails}>
                             <Box my={2}>
                                 <TextField
-                                    value={contractAddress}
+                                    value={contract}
                                     name="name"
                                     id="outlined-basic"
                                     label="Ballot Address"
                                     variant="outlined"
-                                    onChange={(e) => setContractAddress(e.target.value)}
+                                    onChange={(e) => setContract(e.target.value)}
                                     fullWidth
                                 />
                             </Box>

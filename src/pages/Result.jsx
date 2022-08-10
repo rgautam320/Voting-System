@@ -2,9 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Alert, Button, Divider, Paper, TextField, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 
-const Result = ({ voting, setLoading, getBallotDetails, state, ballot, choices, getChoices, getCurrentState }) => {
-    const [contractAddress, setContractAddress] = useState("");
-
+const Result = ({
+    voting,
+    setLoading,
+    getBallotDetails,
+    state,
+    ballot,
+    choices,
+    getChoices,
+    getCurrentState,
+    contract,
+    setContract,
+}) => {
     const [result, setResult] = useState([]);
 
     const getResult = async (choice) => {
@@ -25,17 +34,11 @@ const Result = ({ voting, setLoading, getBallotDetails, state, ballot, choices, 
     };
 
     useEffect(() => {
-        if (contractAddress && ballot.address) {
+        if (contract && ballot.address) {
             getChoices();
             getCurrentState();
         }
-    }, [getChoices, ballot, contractAddress, getCurrentState]);
-
-    useEffect(() => {
-        if (localStorage.getItem("CONTRACT")) {
-            setContractAddress(localStorage.getItem("CONTRACT"));
-        }
-    }, []);
+    }, [getChoices, ballot, contract, getCurrentState]);
 
     return (
         <Container>
@@ -51,12 +54,12 @@ const Result = ({ voting, setLoading, getBallotDetails, state, ballot, choices, 
                         <form onSubmit={getBallotDetails}>
                             <Box my={2}>
                                 <TextField
-                                    value={contractAddress}
+                                    value={contract}
                                     name="name"
                                     id="outlined-basic"
                                     label="Ballot Address"
                                     variant="outlined"
-                                    onChange={(e) => setContractAddress(e.target.value)}
+                                    onChange={(e) => setContract(e.target.value)}
                                     fullWidth
                                 />
                             </Box>
